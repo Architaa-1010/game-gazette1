@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Game Gazette</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&family=Bebas+Neue&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════
+       HOME PAGE
+  ═══════════════════════════════════ -->
+  <div id="home">
+
+    <!-- Masthead / Newspaper Header -->
+    <header>
+      <div class="masthead">
+        <div class="masthead-left">
+          EST. 2025<br />
+          VOL. I · NO. 1<br />
+          FREE TO PLAY
+        </div>
+        <div class="masthead-title">THE<br /><em>GAME</em><br />GAZETTE</div>
+        <div class="masthead-right">
+          TWO PLAYERS<br />
+          ONE BOARD<br />
+          NO MERCY
+        </div>
+      </div>
+      <div class="kicker-strip">— SELECT YOUR ARENA AND DECLARE WAR —</div>
+    </header>
+
+    <!-- Two-column game selector -->
+    <div class="home-body">
+
+      <!-- Connect Four column -->
+      <div class="game-column" onclick="openGame('c4')">
+        <div class="col-tag c4">GAME I — COLUMN WARFARE</div>
+        <div class="col-headline c4">CON<em>NECT</em><br />FOUR</div>
+
+        <p class="col-body">
+          Drop discs into a 7-column grid. Gravity pulls them down.
+          First player to align four of their colour — horizontally,
+          vertically, or diagonally — wins the bout.
+        </p>
+        <p class="col-body">
+          Every move locks a position forever. Think three moves ahead
+          or perish.
+        </p>
+
+        <!-- Miniature board preview (SVG) -->
+        <svg class="c4-preview" viewBox="0 0 224 128" width="224" height="128" xmlns="http://www.w3.org/2000/svg">
+          <rect width="224" height="128" fill="#0a0a08"/>
+          <circle cx="20"  cy="20"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="52"  cy="20"  r="10" fill="#c0392b"/>
+          <circle cx="84"  cy="20"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="116" cy="20"  r="10" fill="#1a3a6b"/>
+          <circle cx="148" cy="20"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="180" cy="20"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="212" cy="20"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="20"  cy="52"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="52"  cy="52"  r="10" fill="#1a3a6b"/>
+          <circle cx="84"  cy="52"  r="10" fill="#c0392b"/>
+          <circle cx="116" cy="52"  r="10" fill="#c0392b"/>
+          <circle cx="148" cy="52"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="180" cy="52"  r="10" fill="#1a3a6b"/>
+          <circle cx="212" cy="52"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="20"  cy="84"  r="10" fill="#1a3a6b"/>
+          <circle cx="52"  cy="84"  r="10" fill="#c0392b"/>
+          <circle cx="84"  cy="84"  r="10" fill="#1a3a6b"/>
+          <circle cx="116" cy="84"  r="10" fill="#c0392b"/>
+          <circle cx="148" cy="84"  r="10" fill="#c0392b"/>
+          <circle cx="180" cy="84"  r="10" fill="#1a3a6b"/>
+          <circle cx="212" cy="84"  r="10" fill="#f2ede4" opacity="0.15"/>
+          <circle cx="20"  cy="116" r="10" fill="#c0392b"/>
+          <circle cx="52"  cy="116" r="10" fill="#1a3a6b"/>
+          <circle cx="84"  cy="116" r="10" fill="#c0392b"/>
+          <circle cx="116" cy="116" r="10" fill="#1a3a6b"/>
+          <circle cx="148" cy="116" r="10" fill="#c0392b"/>
+          <circle cx="180" cy="116" r="10" fill="#1a3a6b"/>
+          <circle cx="212" cy="116" r="10" fill="#c0392b"/>
+          <line x1="20" y1="116" x2="148" y2="116" stroke="#c0392b" stroke-width="3" stroke-dasharray="4 2" opacity="0.7"/>
+        </svg>
+
+        <div class="col-stats">
+          <div class="stat-box">
+            <div class="stat-n c4">7×6</div>
+            <div class="stat-lbl">Grid</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n c4">4</div>
+            <div class="stat-lbl">In a row</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n c4">2</div>
+            <div class="stat-lbl">Players</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n c4">∞</div>
+            <div class="stat-lbl">Rematches</div>
+          </div>
+        </div>
+
+        <button class="play-cta c4">→ Enter the Column</button>
+      </div>
+
+      <!-- Column divider -->
+      <div class="col-divider"></div>
+
+      <!-- Gomoku column -->
+      <div class="game-column" onclick="openGame('gm')">
+        <div class="col-tag gm">GAME II — ANCIENT CONQUEST</div>
+        <div class="col-headline gm">GO<em>MO</em><br />KU</div>
+
+        <p class="col-body">
+          An ancient Japanese strategy game played on a 15×15 grid.
+          Place your stone. Claim your territory. First to connect
+          five in a row — in any direction — claims victory.
+        </p>
+        <p class="col-body">
+          42 possible lines of attack. 225 intersections.
+          One winner.
+        </p>
+
+        <!-- Miniature board preview (SVG) -->
+        <svg class="c4-preview" viewBox="0 0 224 128" width="224" height="128" xmlns="http://www.w3.org/2000/svg">
+          <rect width="224" height="128" fill="#ddd5c4"/>
+          <g stroke="#0a0a08" stroke-width="0.5" opacity="0.4">
+            <line x1="12" y1="12" x2="12" y2="116"/> <line x1="28" y1="12" x2="28" y2="116"/>
+            <line x1="44" y1="12" x2="44" y2="116"/> <line x1="60" y1="12" x2="60" y2="116"/>
+            <line x1="76" y1="12" x2="76" y2="116"/> <line x1="92" y1="12" x2="92" y2="116"/>
+            <line x1="108" y1="12" x2="108" y2="116"/> <line x1="124" y1="12" x2="124" y2="116"/>
+            <line x1="140" y1="12" x2="140" y2="116"/> <line x1="156" y1="12" x2="156" y2="116"/>
+            <line x1="172" y1="12" x2="172" y2="116"/> <line x1="188" y1="12" x2="188" y2="116"/>
+            <line x1="204" y1="12" x2="204" y2="116"/>
+            <line x1="12" y1="12" x2="204" y2="12"/> <line x1="12" y1="28" x2="204" y2="28"/>
+            <line x1="12" y1="44" x2="204" y2="44"/> <line x1="12" y1="60" x2="204" y2="60"/>
+            <line x1="12" y1="76" x2="204" y2="76"/> <line x1="12" y1="92" x2="204" y2="92"/>
+            <line x1="12" y1="108" x2="204" y2="108"/> <line x1="12" y1="116" x2="204" y2="116"/>
+          </g>
+          <circle cx="76"  cy="60" r="7" fill="#0a0a08"/>
+          <circle cx="92"  cy="60" r="7" fill="#0a0a08"/>
+          <circle cx="108" cy="60" r="7" fill="#0a0a08"/>
+          <circle cx="124" cy="60" r="7" fill="#0a0a08"/>
+          <circle cx="140" cy="60" r="7" fill="#0a0a08"/>
+          <circle cx="92"  cy="76" r="7" fill="#f2ede4" stroke="#0a0a08" stroke-width="1"/>
+          <circle cx="108" cy="76" r="7" fill="#f2ede4" stroke="#0a0a08" stroke-width="1"/>
+          <circle cx="124" cy="76" r="7" fill="#f2ede4" stroke="#0a0a08" stroke-width="1"/>
+          <circle cx="76"  cy="44" r="7" fill="#f2ede4" stroke="#0a0a08" stroke-width="1"/>
+          <circle cx="60"  cy="76" r="7" fill="#0a0a08"/>
+          <circle cx="76"  cy="60" r="3.5" fill="#1a3a6b"/>
+          <circle cx="92"  cy="60" r="3.5" fill="#1a3a6b"/>
+          <circle cx="108" cy="60" r="3.5" fill="#1a3a6b"/>
+          <circle cx="124" cy="60" r="3.5" fill="#1a3a6b"/>
+          <circle cx="140" cy="60" r="3.5" fill="#1a3a6b"/>
+        </svg>
+
+        <div class="col-stats">
+          <div class="stat-box">
+            <div class="stat-n gm">15×15</div>
+            <div class="stat-lbl">Grid</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n gm">5</div>
+            <div class="stat-lbl">In a row</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n gm">2</div>
+            <div class="stat-lbl">Players</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-n gm">∞</div>
+            <div class="stat-lbl">Rematches</div>
+          </div>
+        </div>
+
+        <button class="play-cta gm">→ Claim the Board</button>
+      </div>
+
+    </div><!-- /.home-body -->
+  </div><!-- /#home -->
+
+
+  <!-- ═══════════════════════════════════
+       GAME SCREEN (hidden until a game is chosen)
+  ═══════════════════════════════════ -->
+  <div id="game-screen">
+
+    <!-- Top bar -->
+    <div class="game-masthead">
+      <button class="back-lnk" onclick="goHome()">← BACK</button>
+      <div class="game-name" id="g-title"></div>
+      <div class="game-meta">THE GAME GAZETTE<br />LIVE MATCH</div>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="score-strip">
+      <div class="score-cell">
+        <div class="score-tag" id="p1-tag">RED</div>
+        <div class="score-num p1" id="sc-p1">0</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-tag">DRAWS</div>
+        <div class="score-num draws" id="sc-d">0</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-tag" id="p2-tag">BLUE</div>
+        <div class="score-num p2" id="sc-p2">0</div>
+      </div>
+    </div>
+
+    <!-- Whose turn -->
+    <div class="turn-bar" id="turn-bar"></div>
+
+    <!-- Board + sidebar layout -->
+    <div class="game-layout">
+
+      <div class="board-area">
+        <!-- Connect Four board (shown/hidden by JS) -->
+        <div id="c4-wrap">
+          <div class="c4-hover-row" id="c4-arrows"></div>
+          <div class="c4-board" id="c4-board"></div>
+        </div>
+
+        <!-- Gomoku canvas (shown/hidden by JS) -->
+        <div id="gm-wrap">
+          <canvas id="gm-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Sidebar: rules + move log + reset -->
+      <div class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-head">HOW TO WIN</div>
+          <ul class="sidebar-rules" id="sidebar-rules"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-head">MATCH LOG</div>
+          <div class="move-log" id="move-log">— match begins —</div>
+        </div>
+        <div class="sidebar-section">
+          <button class="reset-btn" onclick="resetCurrent()">↺ RESET BOARD</button>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /#game-screen -->
+
+
+  <!-- ═══════════════════════════════════
+       RESULT MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-bg" id="modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>THE GAME GAZETTE</span>
+        <span>MATCH REPORT</span>
+      </div>
+      <div class="modal-headline" id="modal-hl"></div>
+      <div class="modal-sub" id="modal-sub"></div>
+      <div class="modal-actions">
+        <button class="primary" onclick="playAgain()">↺ REMATCH</button>
+        <button class="secondary" onclick="goHome()">← HOME</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════
+       SCRIPTS (order matters)
+  ═══════════════════════════════════ -->
+  <script src="js/connect-four.js"></script>
+  <script src="js/gomoku.js"></script>
+
+  <!-- Shared UI controller (inline — small enough to keep here) -->
+  <script>
+    /* ─── Shared state ─── */
+    let currentGame = null;
+    let scores      = { p1: 0, p2: 0, d: 0 };
+    let moveLogLines = [];
+
+    /* ─── Shared helpers ─── */
+    function log(msg) {
+      moveLogLines.unshift(msg);
+      if (moveLogLines.length > 30) moveLogLines.pop();
+      document.getElementById('move-log').innerHTML = moveLogLines.join('<br>');
+    }
+
+    function updateScores() {
+      document.getElementById('sc-p1').textContent = scores.p1;
+      document.getElementById('sc-p2').textContent = scores.p2;
+      document.getElementById('sc-d').textContent  = scores.d;
+    }
+
+    function setTurn(html) {
+      document.getElementById('turn-bar').innerHTML = html;
+    }
+
+    function showModal(headline, sub) {
+      document.getElementById('modal-hl').innerHTML  = headline;
+      document.getElementById('modal-sub').textContent = sub;
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    /* ─── Navigation ─── */
+    function openGame(game) {
+      currentGame  = game;
+      scores       = { p1: 0, p2: 0, d: 0 };
+      moveLogLines = [];
+      updateScores();
+
+      document.getElementById('home').style.display        = 'none';
+      document.getElementById('game-screen').style.display = 'block';
+      document.getElementById('c4-wrap').style.display     = 'none';
+      document.getElementById('gm-wrap').style.display     = 'none';
+
+      if (game === 'c4') {
+        document.getElementById('g-title').textContent    = 'CONNECT FOUR';
+        document.getElementById('g-title').className      = 'game-name c4';
+        document.getElementById('p1-tag').textContent     = 'RED';
+        document.getElementById('p2-tag').textContent     = 'BLUE';
+        document.getElementById('sidebar-rules').innerHTML =
+          '<li>Drop a disc into any column</li>' +
+          '<li>Gravity fills from bottom up</li>' +
+          '<li>Connect 4 in a row to win</li>'   +
+          '<li>Rows, columns, or diagonals</li>';
+        document.getElementById('c4-wrap').style.display = 'block';
+        initC4();
+
+      } else {
+        document.getElementById('g-title').textContent    = 'GOMOKU';
+        document.getElementById('g-title').className      = 'game-name gm';
+        document.getElementById('p1-tag').textContent     = 'BLACK';
+        document.getElementById('p2-tag').textContent     = 'WHITE';
+        document.getElementById('sidebar-rules').innerHTML =
+          '<li>Click any intersection to place</li>' +
+          '<li>Black moves first</li>'               +
+          '<li>Connect exactly 5 to win</li>'        +
+          '<li>Any direction counts</li>';
+        document.getElementById('gm-wrap').style.display = 'block';
+        initGM();
+      }
+    }
+
+    function goHome() {
+      document.getElementById('home').style.display        = 'block';
+      document.getElementById('game-screen').style.display = 'none';
+      closeModal();
+    }
+
+    function resetCurrent() {
+      closeModal();
+      if (currentGame === 'c4') initC4();
+      else initGM();
+    }
+
+    function playAgain() { resetCurrent(); }
+  </script>
+
+</body>
+</html>
