@@ -1,0 +1,595 @@
+/* ============================================================
+   THE GAME GAZETTE — main.css
+   Brutalist newspaper aesthetic
+   Fonts: Playfair Display · Bebas Neue · Courier Prime
+   ============================================================ */
+
+
+/* ─── CSS Custom Properties ─── */
+:root {
+  --ink:     #0a0a08;
+  --paper:   #f2ede4;
+  --paper2:  #e8e2d6;
+  --red:     #c0392b;   /* Player 1 / Connect Four accent */
+  --blue:    #1a3a6b;   /* Player 2 / Gomoku accent       */
+
+  --rule:      3px solid #0a0a08;
+  --rule-thin: 1px solid #0a0a08;
+
+  --playfair: 'Playfair Display', serif;
+  --bebas:    'Bebas Neue', sans-serif;
+  --courier:  'Courier Prime', monospace;
+}
+
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--courier);
+  min-height: 100vh;
+  cursor: crosshair;
+
+  /* Subtle ruled-paper texture */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 27px,
+    rgba(0, 0, 0, 0.04) 27px,
+    rgba(0, 0, 0, 0.04) 28px
+  );
+}
+
+
+/* ─── Page Wrappers ─── */
+#home,
+#game-screen {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#game-screen {
+  display: none; /* shown via JS when a game is chosen */
+}
+
+
+/* ============================================================
+   MASTHEAD — newspaper header
+   ============================================================ */
+.masthead {
+  border-bottom: var(--rule);
+  padding: 0.6rem 0 0.4rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.masthead-left {
+  font-family: var(--courier);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  border-right: var(--rule-thin);
+  padding-right: 0.8rem;
+}
+
+.masthead-title {
+  font-family: var(--playfair);
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-align: center;
+  letter-spacing: -0.02em;
+  padding: 0 1rem;
+}
+
+.masthead-title em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.masthead-right {
+  font-family: var(--courier);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  text-align: right;
+  border-left: var(--rule-thin);
+  padding-left: 0.8rem;
+}
+
+/* Thin tagline strip below masthead */
+.kicker-strip {
+  border-bottom: var(--rule);
+  border-top: 2px solid var(--ink);
+  padding: 3px 0;
+  font-family: var(--bebas);
+  letter-spacing: 0.25em;
+  font-size: 11px;
+  text-align: center;
+}
+
+
+/* ============================================================
+   HOME — two-column game selector
+   ============================================================ */
+.home-body {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  min-height: calc(100vh - 120px);
+}
+
+/* Vertical rule between columns */
+.col-divider {
+  background: var(--ink);
+}
+
+/* Individual game column */
+.game-column {
+  padding: 1.5rem 1.8rem;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.game-column:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Section label above headline */
+.col-tag {
+  font-family: var(--bebas);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  border-bottom: var(--rule-thin);
+  padding-bottom: 4px;
+  margin-bottom: 1rem;
+}
+.col-tag.c4 { color: var(--red);  }
+.col-tag.gm { color: var(--blue); }
+
+/* Large editorial headline */
+.col-headline {
+  font-family: var(--playfair);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+.col-headline.c4 { color: var(--red);  }
+.col-headline.gm { color: var(--blue); }
+.col-headline em { font-style: italic; }
+
+/* Body copy */
+.col-body {
+  font-size: 13px;
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+.col-body + .col-body {
+  border-top: var(--rule-thin);
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* SVG board thumbnail */
+.c4-preview {
+  display: block;
+  margin: 0.8rem 0;
+  border: var(--rule-thin);
+}
+
+/* 2×2 stat grid */
+.col-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: var(--rule-thin);
+  margin-bottom: 1.2rem;
+}
+
+.stat-box {
+  padding: 6px 10px;
+  border-right: var(--rule-thin);
+  border-bottom: var(--rule-thin);
+}
+.stat-box:nth-child(even)       { border-right: none; }
+.stat-box:nth-last-child(-n+2)  { border-bottom: none; }
+
+.stat-n {
+  font-family: var(--bebas);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.stat-n.c4 { color: var(--red);  }
+.stat-n.gm { color: var(--blue); }
+
+.stat-lbl {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+/* CTA button */
+.play-cta {
+  display: inline-block;
+  font-family: var(--bebas);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  padding: 8px 22px;
+  border: var(--rule);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.play-cta:hover        { background: var(--ink);  color: var(--paper); }
+.play-cta.c4:hover     { background: var(--red);  border-color: var(--red);  color: #fff; }
+.play-cta.gm:hover     { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+
+/* ============================================================
+   GAME SCREEN — top bar, score, turn indicator
+   ============================================================ */
+.game-masthead {
+  border-bottom: var(--rule);
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.game-name {
+  font-family: var(--playfair);
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+.game-name.c4 { color: var(--red);  }
+.game-name.gm { color: var(--blue); }
+
+.game-meta {
+  font-family: var(--courier);
+  font-size: 11px;
+  text-align: right;
+  color: #555;
+}
+
+.back-lnk {
+  font-family: var(--bebas);
+  letter-spacing: 0.2em;
+  font-size: 14px;
+  border: 2px solid var(--ink);
+  padding: 5px 14px;
+  background: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+.back-lnk:hover { background: var(--ink); color: var(--paper); }
+
+/* Score strip */
+.score-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: var(--rule);
+  border-top: 2px solid var(--ink);
+}
+
+.score-cell {
+  padding: 8px 12px;
+  text-align: center;
+  border-right: var(--rule-thin);
+}
+.score-cell:last-child { border-right: none; }
+
+.score-tag {
+  font-family: var(--bebas);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: #666;
+}
+
+.score-num {
+  font-family: var(--playfair);
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.score-num.p1    { color: var(--red);  }
+.score-num.p2    { color: var(--blue); }
+.score-num.draws { color: #888;        }
+
+/* Whose turn */
+.turn-bar {
+  font-family: var(--courier);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 6px 0;
+  border-bottom: var(--rule-thin);
+  text-align: center;
+  min-height: 32px;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   GAME LAYOUT — board + sidebar
+   ============================================================ */
+.game-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  min-height: calc(100vh - 160px);
+}
+
+.board-area {
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-right: var(--rule-thin);
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+}
+
+.sidebar-section {
+  border-bottom: var(--rule-thin);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.sidebar-section:last-child { border-bottom: none; }
+
+.sidebar-head {
+  font-family: var(--bebas);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-rules {
+  font-size: 12px;
+  line-height: 1.8;
+  padding-left: 1rem;
+}
+
+.move-log {
+  font-family: var(--courier);
+  font-size: 10px;
+  line-height: 1.9;
+  max-height: 160px;
+  overflow-y: auto;
+  color: #444;
+}
+
+/* Coloured player names inside the log */
+.move-log .c4 { color: var(--red);  font-weight: 700; }
+.move-log .gm { color: var(--blue); font-weight: 700; }
+
+.reset-btn {
+  font-family: var(--bebas);
+  letter-spacing: 0.2em;
+  font-size: 13px;
+  border: 2px solid var(--ink);
+  padding: 7px 18px;
+  background: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  width: 100%;
+}
+.reset-btn:hover { background: var(--ink); color: var(--paper); }
+
+
+/* ============================================================
+   CONNECT FOUR — board styles
+   ============================================================ */
+
+/* Column drop-hint arrows */
+.c4-hover-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding: 0 0 4px;
+}
+
+.c4-hover-cell {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+/* Show all arrows faintly on row hover; full opacity on individual cell hover */
+.c4-hover-row:hover .c4-hover-cell { opacity: 0.2; }
+.c4-hover-cell:hover                { opacity: 1 !important; }
+
+/* The grid itself */
+.c4-board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  background: var(--ink);
+  padding: 10px;
+  border: var(--rule);
+}
+
+/* Individual cell (circle) */
+.c4-cell {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid #555;
+  cursor: pointer;
+  transition: border-color 0.1s;
+}
+.c4-cell:hover { border-color: #aaa; }
+
+/* Filled cells */
+.c4-cell.p1 {
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+.c4-cell.p2 {
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Winning cells pulse */
+.c4-cell.win-flash {
+  animation: winFlash 0.5s ease infinite alternate;
+}
+@keyframes winFlash {
+  from { transform: scale(1);   filter: brightness(1);   }
+  to   { transform: scale(1.1); filter: brightness(1.3); }
+}
+
+/* Drop animation */
+.c4-cell.drop {
+  animation: dropIn 0.22s cubic-bezier(0.4, 0, 1, 1);
+}
+@keyframes dropIn {
+  from { transform: translateY(-320px) scale(0.9); opacity: 0.4; }
+  to   { transform: translateY(0)      scale(1);   opacity: 1;   }
+}
+
+
+/* ============================================================
+   GOMOKU — canvas is styled inline via JS; minimal CSS here
+   ============================================================ */
+#gm-canvas {
+  display: block;
+  cursor: crosshair;
+  border: var(--rule);
+}
+
+
+/* ============================================================
+   RESULT MODAL
+   ============================================================ */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 8, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal-bg.open { display: flex; }
+
+.modal-box {
+  background: var(--paper);
+  border: var(--rule);
+  max-width: 440px;
+  width: 90%;
+  animation: modalIn 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+@keyframes modalIn {
+  from { transform: scale(0.8) rotate(-2deg); opacity: 0; }
+  to   { transform: scale(1)   rotate(0deg);  opacity: 1; }
+}
+
+.modal-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.8rem 1.2rem;
+  font-family: var(--bebas);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-headline {
+  font-family: var(--playfair);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.95;
+  padding: 1.2rem 1.4rem 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.modal-sub {
+  font-family: var(--courier);
+  font-size: 12px;
+  padding: 0 1.4rem 1.2rem;
+  color: #444;
+  line-height: 1.6;
+  border-bottom: var(--rule-thin);
+}
+
+.modal-actions {
+  padding: 1rem 1.4rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.modal-actions button {
+  flex: 1;
+  font-family: var(--bebas);
+  letter-spacing: 0.2em;
+  font-size: 14px;
+  border: 2px solid var(--ink);
+  padding: 10px;
+  background: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.modal-actions button.primary            { background: var(--ink);  color: var(--paper); }
+.modal-actions button.primary:hover      { background: var(--red);  border-color: var(--red); }
+.modal-actions button.secondary:hover    { background: var(--ink);  color: var(--paper); }
+
+
+/* ============================================================
+   RESPONSIVE — mobile adjustments
+   ============================================================ */
+@media (max-width: 680px) {
+  /* Stack columns vertically on small screens */
+  .home-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 2px auto;
+  }
+  .col-divider {
+    width: 100%;
+    height: 2px;
+  }
+
+  /* Stack board + sidebar vertically */
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+  .board-area {
+    border-right: none;
+    border-bottom: var(--rule-thin);
+    padding: 1rem 0;
+    overflow-x: auto;
+  }
+
+  /* Slightly smaller discs on mobile */
+  .c4-cell {
+    width: 42px;
+    height: 42px;
+  }
+}
