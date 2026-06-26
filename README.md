@@ -6,10 +6,7 @@ A brutalist newspaper-themed browser arcade featuring two classic strategy games
 
 ## Live Demo
 
-🔗 **[Architaa-1010.github.io/game-gazette]
-
 ![Demo](demo.gif)
-
 
 ---
 
