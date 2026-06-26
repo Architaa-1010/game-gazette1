@@ -6,7 +6,9 @@ A brutalist newspaper-themed browser arcade featuring two classic strategy games
 
 ## Live Demo
 
-🔗 **[Architaa-1010.github.io/game-gazette](https://Architaa-1010.github.io/game-gazette)**  
+🔗 **[Architaa-1010.github.io/game-gazette]
+
+![Demo](demo.gif)
 
 
 ---
@@ -39,6 +41,20 @@ game-gazette/
 │   └── gomoku.js       # Gomoku logic + Canvas rendering
 └── README.md
 ```
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Frontend | HTML5 |
+| Styling | CSS3 (Flexbox, Grid, CSS Variables, Animations) |
+| Programming Language | JavaScript (ES6+) |
+| Graphics | HTML5 Canvas API (Gomoku) |
+| Typography | Google Fonts (Playfair Display, Bebas Neue, Courier Prime) |
+| Version Control | Git & GitHub |
+| Deployment | GitHub Pages |
 
 ---
 
@@ -119,3 +135,9 @@ docs: README with setup + deploy instructions
 ## License
 
 MIT — use it, remix it, ship it.
+
+---
+
+## Author
+
+Architaa A
